@@ -1,4 +1,4 @@
-from xsbpe.base import Tokenizer, get_consecutive_pairs, merge_pairs
+from xsbpe.base import Tokenizer, get_adjacent_pair_counts, merge_pairs
 
 
 class BasicTokenizer(Tokenizer):
@@ -15,7 +15,7 @@ class BasicTokenizer(Tokenizer):
         merges = {}
         vocab = {idx: bytes([idx]) for idx in range(256)}
         for i in range(num_merges):
-            stats = get_consecutive_pairs(ids)
+            stats = get_adjacent_pair_counts(ids)
             pair = max(stats, key=stats.get)
             idx = 256 + i
             ids = merge_pairs(ids, pair, idx)
@@ -38,7 +38,7 @@ class BasicTokenizer(Tokenizer):
         text_bytes = text.encode('utf-8')
         ids = list(text_bytes)
         while len(ids) >= 2:
-            stats = get_consecutive_pairs(ids)
+            stats = get_adjacent_pair_counts(ids)
             pair = min(stats, key=lambda p: self.merges.get(p, float('inf')))
             if pair not in self.merges:
                 break

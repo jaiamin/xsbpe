@@ -1,24 +1,25 @@
 import unicodedata
+from collections import defaultdict
+from itertools import pairwise
 
-def get_consecutive_pairs(ids, counts=None) -> dict:
-    counts = {} if counts is None else counts
-    for pair in zip(ids, ids[1:]):
-        counts[pair] = counts.get(pair, 0) + 1
+def get_adjacent_pair_counts(ids) -> defaultdict:
+    counts = defaultdict(int)
+    for pair in pairwise(ids):
+        counts[pair] += 1
     return counts
-
 
 def merge_pairs(ids, pair, idx):
     newids = []
     i = 0
-    while i < len(ids):
-        if ids[i] == pair[0] and i < len(ids) - 1 and ids[i+1] == pair[1]:
+    n = len(ids)
+    while i < n:
+        if i < n - 1 and ids[i] == pair[0] and ids[i+1] == pair[1]:
             newids.append(idx)
             i += 2
         else:
             newids.append(ids[i])
             i += 1
     return newids
-
 
 def replace_control_characters(s: str) -> str:
     chars = []
@@ -29,11 +30,11 @@ def replace_control_characters(s: str) -> str:
             chars.append(f'\\u{ord(ch):04x}') # escape
     return ''.join(chars)
 
-
 def render_token(t: bytes) -> str:
     s = t.decode('utf-8', errors='replace')
     s = replace_control_characters(s)
     return s
+
 
 class Tokenizer:
     """Base class for Tokenizers"""

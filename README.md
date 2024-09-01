@@ -1,1 +1,1 @@
-An extra-small BPE tokenizer inspired by Karpathy's minibpe.
+An extra-small BPE tokenizer inspired by Karpathy's minbpe.
