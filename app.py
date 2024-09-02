@@ -3,7 +3,7 @@ from xsbpe.basic import BasicTokenizer
 
 tk = BasicTokenizer()
 print('Tokenizer initialized.')
-tk.train(open('dune.txt').read(), 256 + 10, verbose=False)
+tk.train(open('dune.txt').read(), 256 + 10000, verbose=False)
 print('Training complete.')
 
 def tokenize(text):
