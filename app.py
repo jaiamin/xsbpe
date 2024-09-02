@@ -16,11 +16,7 @@ def tokenize(text, checked):
     colored_tokens = []
     
     for i, token in enumerate(tokens):
-        if checked:
-            ws_val = '⋅'
-        else:
-            ws_val = '&nbsp;'
-        token = tk.vocab[token].decode('utf-8').replace(' ', ws_val)
+        token = tk.vocab[token].decode('utf-8').replace(' ', '⋅' if checked else '&nbsp;')
         span = f'<span style="background-color: {colors[i % len(colors)]}">{token}</span>'
         colored_tokens.append(span)
 
@@ -48,4 +44,4 @@ interface = gr.Interface(
     show_progress='hidden',
     api_name='tokenize',
     allow_flagging='never'
-).launch()
+).launch(inbrowser=True)
