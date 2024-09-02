@@ -1,10 +1,13 @@
+import time
 import gradio as gr
 from xsbpe.basic import BasicTokenizer
 
 tk = BasicTokenizer()
 print('Tokenizer initialized.')
-tk.train(open('dune.txt').read(), 256 + 10000, verbose=False)
-print('Training complete.')
+st = time.time()
+tk.load('dune-20256.model')
+et = time.time()
+print(f'Model loaded. Took {et-st} seconds.')
 
 def tokenize(text):
     tokens = tk.encode(text)
@@ -31,7 +34,8 @@ interface = gr.Interface(
     title="BPE Tokenization Visualizer",
     live=True,
     examples=[
-        'BPE, or Byte Pair Encoding, is a method used to compress text by breaking it down into smaller units. In natural language processing, it helps tokenize words by merging the most frequent pairs of characters or symbols, creating more efficient and manageable tokens for analysis.'
+        'BPE, or Byte Pair Encoding, is a method used to compress text by breaking it down into smaller units. In natural language processing, it helps tokenize words by merging the most frequent pairs of characters or symbols, creating more efficient and manageable tokens for analysis.',
+        'This custom BPE tokenizer model was trained on the entire text of the novel Dune by Frank Herbert and has a vocabulary size of 20,256, which corresponds to the 256 bytes base tokens and the symbols learned with 20,000 merges.'
     ],
     show_progress='hidden',
     api_name='tokenize',
