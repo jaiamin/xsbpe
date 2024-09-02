@@ -66,7 +66,7 @@ class Tokenizer:
         # Similar to sentencepiece model saving
         model_file = file_prefix + '.model'
         with open(model_file, 'w') as f:
-            f.write('xsgpe v1\n')
+            f.write('xsbpe v1\n')
             f.write(f'{self.pattern}\n')
             f.write(f'{len(self.special_tokens)}\n')
             for special, idx in self.special_tokens.items():
