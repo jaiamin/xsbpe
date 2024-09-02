@@ -2,7 +2,9 @@ import gradio as gr
 from xsbpe.basic import BasicTokenizer
 
 tk = BasicTokenizer()
-tk.train(open('dune.txt').read(), 256 + 10000, verbose=False)
+print('Tokenizer initialized.')
+tk.train(open('dune.txt').read(), 256 + 10, verbose=False)
+print('Training complete.')
 
 def tokenize(text):
     tokens = tk.encode(text)
