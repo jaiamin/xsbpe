@@ -44,4 +44,4 @@ interface = gr.Interface(
     show_progress='hidden',
     api_name='tokenize',
     allow_flagging='never'
-).launch(inbrowser=True, allowed_paths=['/tmp/gradio/'])
+).launch(inbrowser=True)
