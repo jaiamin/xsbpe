@@ -10,6 +10,7 @@ et = time.time()
 print(f'Model loaded. Took {et-st} seconds.')
 
 def tokenize(text, checked):
+    print('Text:', text)
     tokens = tk.encode(text)
     
     colors = ['rgba(107,64,216,.3)', 'rgba(104,222,122,.4)', 'rgba(244,172,54,.4)', 'rgba(239,65,70,.4)', 'rgba(39,181,234,.4)']
